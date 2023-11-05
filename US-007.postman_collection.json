@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "2ad916d5-2367-483c-941b-813919caf478",
+		"name": "US-007",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30601845"
+	},
+	"item": [
+		{
+			"name": "LOGIN",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"turkeyts\",\r\n  \"password\": \"TechnoStudy123\",\r\n  \"rememberMe\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/auth/login",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Locations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var gelenData = pm.response.json();\r",
+							"var LocationsName = gelenData.name;\r",
+							"var LocationsID = gelenData.id;\r",
+							"\r",
+							"\r",
+							"pm.collectionVariables.set(\"LocationsName\", LocationsName);\r",
+							"pm.collectionVariables.set(\"LocationsID\", LocationsID);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{$randomCountry}}\",\r\n  \"shortName\": \"{{$randomCountryCode}}\",\r\n  \"active\": true,\r\n  \"capacity\": {{$randomInt}},\r\n  \"type\": \"CLASS\",\r\n  \"school\": \"646cbb07acf2ee0d37c6d984\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/location",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"location"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Locations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var gelenData = pm.response.json();\r",
+							"var LocationsName = gelenData.name;\r",
+							"var LocationsID = gelenData.id;\r",
+							"var LocationsShortName = gelenData.shortName;\r",
+							"var LocationsCapacity = gelenData.capacity;\r",
+							"\r",
+							"pm.collectionVariables.set(\"LocationsName\", LocationsName);\r",
+							"pm.collectionVariables.set(\"LocationsID\", LocationsID);\r",
+							"pm.collectionVariables.get(\"LocationsShortName\", LocationsShortName);\r",
+							"pm.collectionVariables.get(\"LocationsCapacity\", LocationsCapacity);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{LocationsID}}\",\r\n  \"name\": \"{{$randomCountry}}\",\r\n  \"shortName\": \"{{$randomCountryCode}}-{{$randomInt}}\",\r\n  \"active\": true,\r\n  \"capacity\": {{$randomInt}},\r\n  \"type\": \"CLASS\",\r\n  \"school\": \"646cbb07acf2ee0d37c6d984\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/location",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"location"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Locations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/location/{{LocationsID}}",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"location",
+						"{{LocationsID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "LocationsName",
+			"value": ""
+		},
+		{
+			"key": "LocationsID",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,494 @@
+{
+	"info": {
+		"_postman_id": "9cd2bc53-1bb7-40b8-807b-fa3544aad14d",
+		"name": "US-005",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30601845"
+	},
+	"item": [
+		{
+			"name": "Mersys Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Login succsesful\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4f886628d9c869412c8d98473f44fdd7485798ae5fc6239555bc5b1b1b5a6d52",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"rememberMe\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mersys Login NEGATİVE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Login failed\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{$randomUserName}}\",\r\n    \"password\": \"{{$randomPassword}}\",\r\n    \"rememberMe\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mersys Positions List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Positions has been successfully\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4f886628d9c869412c8d98473f44fdd7485798ae5fc6239555bc5b1b1b5a6d52",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImV4cCI6MTY5ODkzMTA3MiwiaWF0IjoxNjk4OTMwNzcyLCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiJBQjZCRTBTUUhRX1VzMm9ua1B6SE1uNnlIT1EiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.K-uR40TFVmPFvckJV_rOTeBmalwhnDdZpgo0t9ub_hD_5AO5nDfaz4k36Q11K34UP7HgqlEYGhwY4T9QBd63GeLfLUq5ci5JGXxXvr1wVsf7Xae94suafki6EyQu4we5Ix_5FjP49Gq98cvVsO6Vp2cmGMHOCIybVjZpSZRvv9aSnxkO7n5sEHA_LYPOGFuJ-oYlu9JMVW9L5nfosG7SLIQ2n_o2PWj82Z3iWb7XIDpx7x5AYjtSEBwu-VKqdmwEwWgQ1PAoldkjN2ljvK951Z1mscS9hRdHA5XFMWfUGzudFhFtMGPbMN3E7Q9d3NvEFDa7KRQr4kEcJMQFkfvvhg; refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImF0aSI6IkFCNkJFMFNRSFFfVXMyb25rUHpITW42eUhPUSIsImV4cCI6MTY5OTUzNTU3MiwiaWF0IjoxNjk4OTMwNzcyLCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiJyeTR6M2NOUS13R1FyT191VlBvbjY5WE9aRG8iLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.jjFNOSjcANkYwiACCGVEN8CsNNp83bJ1wE7ea6IOBryh2C_mRF5N9R7vStoLfDBN02HPq1NnlLsYZLScjxVgJaLjmk-rFlxEK-JQ-i7V4-J-3Km-5T5lxHFFxsHgWlQgIhF_CI-VKX7bZMyim5ZJQTM8RmZCMR9TvQq9EvZNJn6SGqyWdhXdd4fXLggw6qG0nAnxNoYhHP6zwwBOHEdWH2bxvGR1RYoAqia3FiZtdVW65caEiRkhk4a4Djl2Ofo4w4MYLKMSzP-0et2gLmDlmZ_lGaoIP5nRrIRuhOhpi6tRx0Q1xtxJ6d8W9oCceUJv4-8aaaldGV_3k-sh7-_flA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/school-service/api/employee-position/search",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"employee-position",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mersys Create Position",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" var incomingData = pm.response.json();\r",
+							"  \r",
+							"pm.collectionVariables.set(\"position_id\", incomingData.id);\r",
+							"\r",
+							"pm.test(\"New Position has been succussefully created\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": null,\r\n    \"name\": \"Manager\",\r\n    \"shortName\": \"MNG001\",\r\n    \"translateName\": [],\r\n    \"tenantId\": \"646cb816433c0f46e7d44cb0\",\r\n    \"active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/school-service/api/employee-position",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"employee-position"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mersys Create Position NEGATİVE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"New Position could not be created\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": null,\r\n    \"name\": \"{{allpositions}}\",\r\n    \"shortName\": \"{{allpositionsshortname}}\",\r\n    \"translateName\": [],\r\n    \"tenantId\": \"646cb816433c0f46e7d44cb0\",\r\n    \"active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/school-service/api/employee-position",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"employee-position"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mersys Edit Position",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Position information has been updated successfully \", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"{{position_id}}\",\r\n    \"name\": \"Director\",\r\n    \"shortName\": \"DR001\",\r\n    \"translateName\": [],\r\n    \"tenantId\": \"646cb816433c0f46e7d44cb0\",\r\n    \"active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/school-service/api/employee-position",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"employee-position"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mersys Position Search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Position search succusseful\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Director\",\r\n    \"shortName\": \"DR001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/school-service/api/employee-position/search",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"employee-position",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mersys Delete Position",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Position has been deleted succussefully\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/school-service/api/employee-position/{{position_id}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"employee-position",
+						"{{position_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mersys Delete Position NEGATİVE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"The deletion did not take place\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4f886628d9c869412c8d98473f44fdd7485798ae5fc6239555bc5b1b1b5a6d52",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/school-service/api/employee-position/search",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"employee-position",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mersys Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Logout succusseful\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/auth/logout",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "position_id",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": "turkeyts",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "TechnoStudy123",
+			"type": "string"
+		},
+		{
+			"key": "allpositionsname",
+			"value": "Manager",
+			"type": "string"
+		},
+		{
+			"key": "allpositionsshortname",
+			"value": "MNG001",
+			"type": "string"
+		},
+		{
+			"key": "URL",
+			"value": "https://test.mersys.io",
+			"type": "string"
+		}
+	]
+}

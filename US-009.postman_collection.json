@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "458cf04e-e2e8-472e-8985-af0cf2fffbce",
+		"name": "US-009",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30601845"
+	},
+	"item": [
+		{
+			"name": "Campus Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"turkeyts\",\r\n  \"password\": \"TechnoStudy123\",\r\n  \"rememberMe\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/auth/login",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADD BANK ACCOUNT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var gelenData=pm.response.json(); // donen değerin JSON datası\r",
+							"var id=gelenData.id;\r",
+							"\r",
+							"pm.collectionVariables.set(\"userID\", id);\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{$randomFirstName}}\",\r\n  \"iban\": \"{{$randomBankAccountIban}}\",\r\n  \"integrationCode\": \"{{$randomCountryCode}}\",\r\n  \"currency\": \"EUR\",\r\n  \"active\": true,\r\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/bank-accounts",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"bank-accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADD BANK ACCOUNT Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var gelenData=pm.response.json(); // donen değerin JSON datası\r",
+							"var name=gelenData.name;\r",
+							"var iban=gelenData.iban;\r",
+							"var integrationCode=gelenData.integrationCode;\r",
+							"var schoolId=gelenData.schoolId;\r",
+							"var currency=gelenData.currency;\r",
+							"\r",
+							"\r",
+							"pm.collectionVariables.set(\"userName\", name);\r",
+							"pm.collectionVariables.set(\"userIban\", iban);\r",
+							"pm.collectionVariables.set(\"userInteg\", integrationCode);\r",
+							"pm.collectionVariables.set(\"userSchool\", schoolId);\r",
+							"pm.collectionVariables.set(\"userCurrency\", currency);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{userID}}\",\r\n  \"name\": \"{{$randomFirstName}}\",\r\n  \"iban\": \"{{$randomBankAccountIban}}\",\r\n  \"integrationCode\": \"{{$randomCountryCode}}\",\r\n  \"currency\": \"EUR\",\r\n  \"active\": true,\r\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/bank-accounts",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"bank-accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bank Account Inactive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{userID}}\",\r\n  \"name\": \"{{userName}}\",\r\n  \"iban\": \"{{userIban}}\",\r\n  \"integrationCode\": \"{{userInteg}}\",\r\n  \"currency\": \"{{userCurrency}}\",\r\n  \"active\": false,\r\n  \"schoolId\": \"{{userSchool}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/bank-accounts",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"bank-accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bank Account Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{userID}}\",\r\n  \"name\": \"{{userName}}\",\r\n  \"iban\": \"{{userIban}}\",\r\n  \"integrationCode\": \"{{userInteg}}\",\r\n  \"currency\": \"{{userCurrency}}\",\r\n  \"active\": false,\r\n  \"schoolId\": \"{{userSchool}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/bank-accounts/{{userID}}",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"bank-accounts",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userID",
+			"value": ""
+		},
+		{
+			"key": "userName",
+			"value": ""
+		},
+		{
+			"key": "userIban",
+			"value": ""
+		},
+		{
+			"key": "userInteg",
+			"value": ""
+		},
+		{
+			"key": "userSchool",
+			"value": ""
+		},
+		{
+			"key": "userCurrency",
+			"value": ""
+		}
+	]
+}
